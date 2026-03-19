@@ -2,15 +2,15 @@ import streamlit as st
 import snowflake.connector
 import pandas as pd
 
-# Snowflake connection
-[snowflake]
-user = "RajyaLakshmi"
-password = "Raji@35210382004"
-account = "WXHNFVF-FL27943"
-warehouse = "cityride_wh"
-database = "cityride"
-schema = "curated"
-
+# Snowflake connection using secrets
+conn = snowflake.connector.connect(
+    user=st.secrets["snowflake"]["user"],
+    password=st.secrets["snowflake"]["password"],
+    account=st.secrets["snowflake"]["account"],
+    warehouse=st.secrets["snowflake"]["warehouse"],
+    database=st.secrets["snowflake"]["database"],
+    schema=st.secrets["snowflake"]["schema"]
+)
 
 # Function to run query
 def run_query(query):
@@ -23,7 +23,7 @@ kpi1 = run_query("""
 SELECT (COUNT_IF(is_flagged=1) * 100.0 / COUNT(*)) AS value
 FROM fact_rentals
 """)
-st.metric("Anomalous Rental %", round(kpi1['VALUE'][0],2))
+st.metric("Anomalous Rental %", round(kpi1['VALUE'][0], 2))
 
 # KPI 3: Engagement Ratio
 kpi3 = run_query("""
@@ -33,14 +33,14 @@ AS value
 FROM fact_rentals
 WHERE start_time >= DATEADD(DAY,-30,CURRENT_DATE)
 """)
-st.metric("Engagement %", round(kpi3['VALUE'][0],2))
+st.metric("Engagement %", round(kpi3['VALUE'][0], 2))
 
 # KPI 4: Fleet Health
 kpi4 = run_query("""
 SELECT (COUNT_IF(battery_level >= 25) * 100.0 / COUNT(*)) AS value
 FROM dim_bikes
 """)
-st.metric("Fleet Health %", round(kpi4['VALUE'][0],2))
+st.metric("Fleet Health %", round(kpi4['VALUE'][0], 2))
 
 # KPI 2: Station Availability Chart
 df_station = run_query("""
