@@ -6,7 +6,7 @@ import pandas as pd
 conn = snowflake.connector.connect(
     user='RajyaLakshmi',
     password='Raji@3521035210',
-    account='WXHNFVF-FL27943',
+    account='',
     warehouse='cityride_wh',
     database='cityride',
     schema='curated'
