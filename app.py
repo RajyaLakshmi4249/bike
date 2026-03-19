@@ -10,7 +10,7 @@ account = "WXHNFVF-FL27943"
 warehouse = "cityride_wh"
 database = "cityride"
 schema = "curated"
-)
+
 
 # Function to run query
 def run_query(query):
