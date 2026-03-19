@@ -33,7 +33,12 @@ AS value
 FROM fact_rentals
 WHERE start_time >= DATEADD(DAY,-30,CURRENT_DATE)
 """)
-st.metric("Engagement %", round(kpi3['VALUE'][0], 2))
+
+if not kpi3.empty:
+    st.metric("Engagement %", round(kpi3.iloc[0,0], 2))
+else:
+    st.metric("Engagement %", "No data")
+
 
 # KPI 4: Fleet Health
 kpi4 = run_query("""
