@@ -3,13 +3,13 @@ import snowflake.connector
 import pandas as pd
 
 # Snowflake connection
-conn = snowflake.connector.connect(
-    user='RajyaLakshmi',
-    password='Raji@35210382004',
-    account='WXHNFVF-FL27943.snowflakecomputing.com',
-    warehouse='cityride_wh',
-    database='cityride',
-    schema='curated'
+[snowflake]
+user = "RajyaLakshmi"
+password = "Raji@35210382004"
+account = "WXHNFVF-FL27943"
+warehouse = "cityride_wh"
+database = "cityride"
+schema = "curated"
 )
 
 # Function to run query
