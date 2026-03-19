@@ -5,8 +5,8 @@ import pandas as pd
 # Snowflake connection
 conn = snowflake.connector.connect(
     user='RajyaLakshmi',
-    password='Raji@3521035210',
-    account='',
+    password='Raji@35210382004',
+    account='WXHNFVF-FL27943.snowflakecomputing.com',
     warehouse='cityride_wh',
     database='cityride',
     schema='curated'
